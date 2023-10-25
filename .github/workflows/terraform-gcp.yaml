@@ -84,7 +84,7 @@ jobs:
 
     - name: Create tfvars file
         
-        run: echo "prefix=\"${{ github.event.pull_request.title }}\"\n"> terraform.tfvars
+      run: echo "prefix=\"${{ github.event.pull_request.title }}\"\n"> terraform.tfvars
     
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
