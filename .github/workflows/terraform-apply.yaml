@@ -44,7 +44,7 @@ jobs:
       run: terraform init
 
     - name: Create guid for workspace
-      run: UUID=$(uuidgen) 
+      run: echo uuidgen >> $UUID
 
     - name: guid versbosity 
       run: echo $UUID
