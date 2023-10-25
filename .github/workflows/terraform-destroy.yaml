@@ -34,11 +34,6 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-    # Step to generate unique id for this run
-    - id: UUIDGen
-      run: |
-        echo "uuid=$(uuidgen)" >> $GITHUB_OUTPUT
-
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
