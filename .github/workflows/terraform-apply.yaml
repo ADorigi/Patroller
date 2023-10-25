@@ -27,15 +27,15 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+
     # Step to generate unique id for this run
     - id: UUIDGen
       run: |
         echo "uuid=$(uuidgen)" >> $GITHUB_OUTPUT
 
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-      
     # gcp authorization with workload identity federation
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
