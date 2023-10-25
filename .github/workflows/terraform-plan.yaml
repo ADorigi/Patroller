@@ -42,7 +42,7 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: 'gcp-Terraform'
+name: 'terraform-plan'
 
 on:
   push:
@@ -54,8 +54,6 @@ permissions:
 
 env:
   TERRAFORM_VERSION: 1.3.7
-  WORKING_DIR: path/to/your/code # relative path under which your terraform codes are
-
 
 jobs:
   terraform:
@@ -81,18 +79,6 @@ jobs:
       with:
         workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider'
         service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
-
-    # # Creating prefix variable to make state prefix as "state/<pull-request-name>"
-    # - name: Create tfvars file 
-    #   env:
-    #     PULL_REQUEST_NAME: ${{ github.event.pull_request.title }}
-    #   run: echo "prefix=\"state$PULL_REQUEST_NAME\"\n"> terraform.tfvars
-
-
-    # # Check tfvars file 
-    # - name: Check tfvars file
-    #   run: cat terraform.tfvars
-    
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
