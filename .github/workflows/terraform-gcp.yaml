@@ -82,14 +82,16 @@ jobs:
         workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider'
         service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
 
-    # Creating prefix variable to make state prefix as "state/<pull-request-name>"
-    - name: Create tfvars file 
-      run: echo "prefix=\"state${{ github.event.pull_request.title }}\"\n"> terraform.tfvars
+    # # Creating prefix variable to make state prefix as "state/<pull-request-name>"
+    # - name: Create tfvars file 
+    #   env:
+    #     PULL_REQUEST_NAME: ${{ github.event.pull_request.title }}
+    #   run: echo "prefix=\"state$PULL_REQUEST_NAME\"\n"> terraform.tfvars
 
 
-    # Check tfvars file 
-    - name: Check tfvars file
-      run: cat terraform.tfvars
+    # # Check tfvars file 
+    # - name: Check tfvars file
+    #   run: cat terraform.tfvars
     
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
@@ -97,6 +99,10 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    # create new workspace to create new state file
+    - name: Setup Workspace
+      run: terraform workspace new ${{ github.event.pull_request.title }} 
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
