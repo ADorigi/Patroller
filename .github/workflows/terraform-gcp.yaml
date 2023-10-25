@@ -71,6 +71,10 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+      
     # gcp authorization with workload identity federation
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
@@ -78,9 +82,7 @@ jobs:
         workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
 
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+    
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
