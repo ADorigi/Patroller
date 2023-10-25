@@ -8,6 +8,6 @@ terraform {
 
   backend "gcs" {
     bucket = "agile-tangent-terraform" # need to update with the bucket name
-    prefix = "state"
+    prefix = format("%s/%s","state",var.prefix )
   }
 }
