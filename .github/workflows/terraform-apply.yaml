@@ -22,7 +22,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.event.inputs.component }}"
+        working-directory: ${{ github.event.inputs.component }}
     permissions:
       contents: 'read'
       id-token: 'write'
