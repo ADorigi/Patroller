@@ -82,9 +82,13 @@ jobs:
         workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider'
         service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
 
-    - name: Create tfvars file
-        
+    # Creating prefix variable to make state prefix as "state/<pull-request-name>"
+    - name: Create tfvars file 
       run: echo "prefix=\"state${{ github.event.pull_request.title }}\"\n"> terraform.tfvars
+
+
+    # Check tfvars file 
+    - name: Check tfvars file
       run: cat terrform.tfvars
     
 
