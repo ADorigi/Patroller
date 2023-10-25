@@ -67,7 +67,9 @@ jobs:
     defaults:
       run:
         shell: bash
-
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
     # gcp authorization with workload identity federation
     - id: 'auth'
