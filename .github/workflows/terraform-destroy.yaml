@@ -61,7 +61,7 @@ jobs:
 
     # use workspace from parameters
     - name: Setup Workspace
-      run: terraform workspace select ${{ github.event.inputs.workspace }}" 
+      run: terraform workspace select ${{ github.event.inputs.workspace }}
 
     # show components in workspace
     - name: Terrform Show
