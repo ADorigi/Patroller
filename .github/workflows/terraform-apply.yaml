@@ -22,6 +22,11 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
+    # Step to generate unique id for this run
+    - id: UUIDGen
+      run: |
+        echo "uuid=$(uuidgen)" >> $GITHUB_OUTPUT
+
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
@@ -43,15 +48,15 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Create guid for workspace
-      run: echo uuidgen >> $UUID
+    # - name: Create guid for workspace
+    #   run: echo uuidgen >> $UUID
 
-    - name: guid versbosity 
-      run: echo $UUID
+    # - name: guid versbosity 
+    #   run: echo $UUID
 
     # create new workspace to create new state file
     - name: Setup Workspace
-      run: terraform workspace new $UUID
+      run: terraform workspace new ${{ steps.UUIDGen.outputs.uuid}} 
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
