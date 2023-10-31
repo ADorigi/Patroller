@@ -1,4 +1,4 @@
 locals {
-    vpc_name = "patroller-vpc"
+  vpc_name = "patroller-vpc"
 
 }
