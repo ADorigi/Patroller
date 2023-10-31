@@ -60,6 +60,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
+      if: always()
       run: terraform plan -input=false
 
 
