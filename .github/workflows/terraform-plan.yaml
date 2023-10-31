@@ -26,7 +26,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ matrix.component }}
+        working-directory: ${{ matrix.components }}
     permissions:
       contents: 'read'
       id-token: 'write'
