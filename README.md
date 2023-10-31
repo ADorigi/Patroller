@@ -2,7 +2,7 @@
 
 Terraform GCP configuration files
 
-Identity pool and service account creted in adorigi/baobab
+Identity pool and service account created in [Baobab](https://github.com/ADorigi/Baobab)
 
 
 <!-- - create a budget in gcp
