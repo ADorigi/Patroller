@@ -5,4 +5,7 @@ resource "google_service_account_iam_binding" "identity_pool_binding" {
   members = [
     "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.workload_identity_pool.name}/attribute.repository/${var.repository_name}",
   ]
+  depends_on = [
+    google_project_iam_member.roles
+  ]
 }
