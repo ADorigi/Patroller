@@ -4,32 +4,32 @@
 #   disabled                  = false
 
 variable "workload_identity_pool_id" {
-  type    = string
+  type = string
 }
 variable "idenity_pool_name" {
-  type    = string
+  type = string
 }
 variable "idenity_pool_description" {
-  type    = string
+  type = string
 }
 
 variable "identity_pool_provider_id" {
-  type    = string
+  type = string
 }
 variable "identity_pool_provider_attributes" {
-  type    = map(string)
+  type = map(string)
 }
 variable "identity_pool_provider_issuer_uri" {
-  type    = string
+  type = string
 }
 variable "service_account_id" {
-  type    = string
+  type = string
 }
 
 variable "service_account_display_name" {
-  type    = string
+  type = string
 }
 
 variable "repository_name" {
-  type    = string
+  type = string
 }

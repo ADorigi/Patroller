@@ -1,4 +1,4 @@
-resource "google_service_account_iam_binding" "identity_pool_binding " {
+resource "google_service_account_iam_binding" "identity_pool_binding" {
   service_account_id = google_service_account.service_account.name
   role               = "roles/iam.workloadIdentityUser"
 
