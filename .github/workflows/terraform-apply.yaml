@@ -34,7 +34,7 @@ jobs:
 
     - name: WorkingDirectory
       run: pwd
-      
+
     # Step to generate unique id for this run
     - id: UUIDGen
       run: |
@@ -73,4 +73,8 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -out=tfplan
     - name: Terraform Apply
+      id: terraformapply
       run: terraform apply -auto-approve tfplan
+    - name: Terraform Destroy on failure
+      if: steps.terraformapply.outcome == 'failure'
+      run: terraform destroy -auto-approve
