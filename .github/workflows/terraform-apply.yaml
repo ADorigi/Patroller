@@ -27,12 +27,14 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-    - name: WorkingDirectory
-      run: pwd
+    
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: WorkingDirectory
+      run: pwd
+      
     # Step to generate unique id for this run
     - id: UUIDGen
       run: |

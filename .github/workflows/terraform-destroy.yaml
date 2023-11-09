@@ -34,11 +34,13 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-    - name: WorkingDirectory
-      run: pwd
+   
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
+
+    - name: WorkingDirectory
+      run: pwd
       
     # gcp authorization with workload identity federation
     - id: 'auth'
