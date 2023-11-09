@@ -12,5 +12,9 @@ module "swath_identity_pool" {
   identity_pool_provider_issuer_uri = "https://token.actions.githubusercontent.com"
   service_account_id                = "swath-service-account"
   service_account_display_name      = "service account for swath github actions"
-  repository_name                   = "ADorigi/Swath"
+  service_account_roles = [
+    "roles/artifactregistry.reader",
+    "roles/artifactregistry.writer",
+  ]
+  repository_name = "ADorigi/Swath"
 }
