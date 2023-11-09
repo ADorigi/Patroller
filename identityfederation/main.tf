@@ -1,6 +1,6 @@
 module "swath_identity_pool" {
   source                    = "./module-identityfederation"
-  workload_identity_pool_id = "swath-idenity-pool-id"
+  workload_identity_pool_id = "swath-gh-idenity-pool"
   idenity_pool_name         = "Swath Github actions pool"
   idenity_pool_description  = "Identity pool to allow swath github actions to access gcp resources"
   identity_pool_provider_id = "swath-pool-provider-id"
