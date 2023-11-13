@@ -5,9 +5,10 @@ module "swath_identity_pool" {
   idenity_pool_description  = "Identity pool to allow swath github actions to access gcp resources"
   identity_pool_provider_id = "swath-pool-provider-id"
   identity_pool_provider_attributes = {
-    "google.subject"  = "assertion.sub",
-    "attribute.actor" = "assertion.actor",
-    "attribute.aud"   = "assertion.aud"
+    "google.subject"       = "assertion.sub",
+    "attribute.actor"      = "assertion.actor",
+    "attribute.aud"        = "assertion.aud",
+    "attribute.repository" = "assertion.repository"
   }
   identity_pool_provider_issuer_uri = "https://token.actions.githubusercontent.com"
   service_account_id                = "swath-service-account"
