@@ -6,6 +6,8 @@ on:
       component:
         description: 'Component that needs to be provisioned'     
         required: true
+      workspace:
+        description: 'workspace unique identifier(only when modifying)'
 
 permissions:
   contents: read
@@ -35,10 +37,12 @@ jobs:
     - name: WorkingDirectory
       run: pwd
 
-    # Step to generate unique id for this run
-    - id: UUIDGen
-      run: |
-        echo "uuid=$(uuidgen)" >> $GITHUB_OUTPUT
+    # # Step to generate unique id for this run
+    # - id: UUIDGen
+    #   name: Generating UUID
+    #   if: github.event.inputs.input1 == ''  
+    #   run: |
+    #     echo "uuid=$(uuidgen)" >> $GITHUB_OUTPUT
 
     # gcp authorization with workload identity federation
     - id: 'auth'
@@ -55,15 +59,20 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    # - name: Create guid for workspace
-    #   run: echo uuidgen >> $UUID
+    # setup workspace with given workspace guid
+    - name: Setup Workspace - Existing state file
+      if: github.event.inputs.workspace != ''
+      run: |
+        terraform workspace select ${{ github.event.inputs.workspace }}
 
-    # - name: guid versbosity 
-    #   run: echo $UUID
-
+    # create unique id to create new workspace
     # create new workspace to create new state file
-    - name: Setup Workspace
-      run: terraform workspace new ${{ steps.UUIDGen.outputs.uuid}} 
+    - name: Setup Workspace - New state file
+      if: github.event.inputs.workspace == ''
+      run: |
+        uuid=$(uuidgen)
+        echo $uuid
+        terraform workspace new $uuid
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
