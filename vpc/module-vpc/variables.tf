@@ -6,3 +6,7 @@ variable "routing_mode" {
   type    = string
   default = "GLOBAL"
 }
+
+variable "mtu" {
+  type = number
+}
