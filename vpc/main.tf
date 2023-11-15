@@ -1,4 +1,5 @@
 module "google-network" {
-  source   = "./module-vpc"
-  vpc_name = "patroller-vpc"
+  source       = "./module-vpc"
+  vpc_name     = "patroller-vpc"
+  routing_mode = "GLOBAL"
 }
