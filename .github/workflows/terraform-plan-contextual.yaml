@@ -1,0 +1,70 @@
+name: 'terraform-plan'
+
+on:
+    workflow_dispatch:
+        inputs:
+          component:
+            description: 'Component eg. vpc, artifactregistry'     
+            required: true
+          workspace:
+            description: 'workspace unique identifier'
+            required: true
+
+permissions:
+  contents: read
+
+env:
+  TERRAFORM_VERSION: 1.3.7
+
+jobs:
+  vpc:
+    strategy:
+      matrix:
+        components: [vpc,subnet,artifactregistry,identityfederation]
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.event.inputs.component }}
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    # gcp authorization with workload identity federation
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider'
+        service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+
+    # use workspace from parameters
+    - name: Setup Workspace
+      run: terraform workspace select ${{ github.event.inputs.workspace }}
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt -check
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      if: always()
+      run: terraform plan -input=false
+
+
+  
