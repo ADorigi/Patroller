@@ -1,3 +1,11 @@
+module "artifact-registry" {
+  source        = "./module-artifactregistry"
+  repository-id = "container-registry"
+  region        = "northamerica-northeast2"
+  description   = "artifact registry for swath"
+  format        = "DOCKER"
+}
+
 module "swath_identity_pool" {
   source                    = "./module-identityfederation"
   workload_identity_pool_id = "swath-gh-idenity-pool"
@@ -18,4 +26,30 @@ module "swath_identity_pool" {
     "roles/artifactregistry.writer",
   ]
   repository_name = "ADorigi/Swath"
+}
+
+module "google-network" {
+  source       = "./module-vpc"
+  vpc_name     = "patroller-vpc"
+  routing_mode = "GLOBAL"
+  mtu          = 1460
+}
+
+
+module "subnet-public" {
+  source            = "./module-subnet"
+  subnet_name       = "public-subnet"
+  ip_cidr_range     = "10.0.0.0/16"
+  region            = "northamerica-northeast2"
+  vpc_name          = "patroller-vpc"
+  private_ip_access = "false"
+}
+
+module "subnet-private" {
+  source            = "./module-subnet"
+  subnet_name       = "private-subnet"
+  ip_cidr_range     = "10.1.0.0/16"
+  region            = "northamerica-northeast2"
+  vpc_name          = "patroller-vpc"
+  private_ip_access = "true"
 }

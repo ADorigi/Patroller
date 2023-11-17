@@ -3,9 +3,6 @@ name: 'terraform-apply'
 on:
   workflow_dispatch:
     inputs:
-      component:
-        description: 'Component that needs to be provisioned'     
-        required: true
       workspace:
         description: 'workspace unique identifier(only when modifying)'
 
@@ -24,7 +21,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.event.inputs.component }}
     permissions:
       contents: 'read'
       id-token: 'write'
