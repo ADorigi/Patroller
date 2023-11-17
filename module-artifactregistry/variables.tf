@@ -1,16 +1,12 @@
 variable "repository-id" {
-  type    = string
-  default = "default-repo-id"
+  type = string
 }
 variable "region" {
-  type    = string
-  default = "northamerica-northeast2"
+  type = string
 }
 variable "description" {
-  type    = string
-  default = "default description"
+  type = string
 }
 variable "format" {
-  type    = string
-  default = "DOCKER"
+  type = string
 }

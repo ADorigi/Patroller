@@ -1,0 +1,5 @@
+subnet_name       = "test-subnet"
+  ip_cidr_range     = "10.0.0.0/16"
+  region            = "northamerica-northeast2"
+  vpc_name          = "test-vpc"
+  private_ip_access = "false"
