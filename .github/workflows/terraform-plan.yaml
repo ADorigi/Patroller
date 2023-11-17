@@ -58,6 +58,9 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check
 
+    - name: List files 
+      run: ls
+
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       if: always()
