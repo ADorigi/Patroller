@@ -3,9 +3,6 @@ name: 'terraform-plan-contextual'
 on:
     workflow_dispatch:
         inputs:
-          component:
-            description: 'Component eg. vpc, artifactregistry'     
-            required: true
           workspace:
             description: 'workspace unique identifier'
             required: true
@@ -26,7 +23,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.event.inputs.component }}
     permissions:
       contents: 'read'
       id-token: 'write'
