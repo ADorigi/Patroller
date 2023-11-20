@@ -9,6 +9,10 @@ Identity pool and service account created in [Baobab](https://github.com/ADorigi
 - Vpc and Subnets
 - Artifact Registry to store container images
 - Identity Federation components for keyless authentication 
+- GKE components
+    - cluster
+    - node-pool
+    - service account
 
 
 ## Projects using this project workflow's resources
