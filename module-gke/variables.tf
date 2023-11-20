@@ -14,15 +14,17 @@ variable "gke-cluster-name" {
   type = string
 }
 
-variable "gke-cluster-zone" {
+variable "gke-zone" {
   type = string
 }
 variable "gke-node-pool-name" {
   type = string
 }
-variable "gke-node-pool-zone" {
+
+variable "gke-node-pool-machine-type" {
   type = string
 }
-variable "gke-node-pool-machine-type" {
+
+variable "static-ip-name" {
   type = string
 }

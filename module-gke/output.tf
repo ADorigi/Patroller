@@ -25,3 +25,7 @@ output "gke-cluster-endpoint" {
 output "gke-node-pool-name" {
   value = google_container_node_pool.gke-node-pool.name
 }
+
+output "static-ip" {
+  value = google_compute_address.gke-static-ip.address
+}

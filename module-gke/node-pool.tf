@@ -1,6 +1,6 @@
 resource "google_container_node_pool" "gke-node-pool" {
   name       = var.gke-cluster-name
-  location   = var.gke-cluster-zone
+  location   = var.gke-zone
   cluster    = google_container_cluster.gke-cluster.name
   node_count = 1
 
