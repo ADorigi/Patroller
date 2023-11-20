@@ -64,4 +64,8 @@ module "gke-cluster" {
   gke-node-pool-name           = "gke-node-pool"
   gke-node-pool-zone           = "northamerica-northeast2-a"
   gke-node-pool-machine-type   = "e2-small"
+  service_account_roles = [
+    "roles/artifactregistry.reader",
+    "roles/artifactregistry.writer",
+  ]
 }
