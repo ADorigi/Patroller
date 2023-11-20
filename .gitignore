@@ -3,3 +3,4 @@
 *.backup
 /oldTerraform
 .terraform*
+.DS_Store
