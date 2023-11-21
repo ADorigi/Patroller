@@ -17,6 +17,10 @@ variable "gke-cluster-name" {
 variable "gke-zone" {
   type = string
 }
+
+variable "gke-region" {
+  type = string
+}
 variable "gke-node-pool-name" {
   type = string
 }
