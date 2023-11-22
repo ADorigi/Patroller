@@ -1,16 +1,16 @@
-name: 'Good Morning'
+name: 'Good Night'
 
 on:
     workflow_dispatch:
     schedule:
-        - cron: '30 7 * * *'
+        - cron: '30 21 * * *'
 
 permissions:
   contents: read
 
 jobs:
   scaleup:
-    name: 'Good Morning'
+    name: 'Good Night'
     runs-on: ubuntu-latest
     environment: production
 
@@ -39,4 +39,4 @@ jobs:
       run: 'gcloud info'
     
     - name: 'Scale up node pool'
-      run: 'gcloud -q container clusters resize primary-cluster --zone northamerica-northeast2-a --node-pool primary-cluster --num-nodes 1'
+      run: 'gcloud -q container clusters resize primary-cluster --zone northamerica-northeast2-a --node-pool primary-cluster --num-nodes 0'
