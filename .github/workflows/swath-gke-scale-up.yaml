@@ -1,0 +1,39 @@
+name: 'Good Morning'
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: '30 7 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  scaleup:
+    name: 'Good Morning'
+    runs-on: ubuntu-latest
+    environment: production
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      
+    # gcp authorization with workload identity federation
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider'
+        service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+      with:
+        version: '>= 363.0.0'
+        
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
