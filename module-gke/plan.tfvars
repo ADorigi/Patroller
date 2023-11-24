@@ -10,3 +10,4 @@ service_account_roles = [
   "roles/artifactregistry.writer",
 ]
 static-ip-name = "gke-static-ip"
+spot-node-pool = true

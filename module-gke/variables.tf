@@ -28,6 +28,9 @@ variable "gke-node-pool-name" {
 variable "gke-node-pool-machine-type" {
   type = string
 }
+variable "spot-node-pool" {
+  type = bool
+}
 
 variable "static-ip-name" {
   type = string

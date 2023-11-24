@@ -7,6 +7,7 @@ resource "google_container_node_pool" "gke-node-pool" {
   node_config {
     preemptible  = false
     machine_type = var.gke-node-pool-machine-type
+    spot         = var.spot-node-pool
 
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     service_account = google_service_account.gke-sa.email
