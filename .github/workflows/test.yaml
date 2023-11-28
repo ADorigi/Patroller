@@ -1,4 +1,4 @@
-name: buildNpush
+name: testAction
 
 on:
     workflow_dispatch:
@@ -17,7 +17,15 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: access_token
-        # create_credentials_file: true
         workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/swath-gh-idenity-pool/providers/swath-pool-provider-id'
         service_account: 'swath-service-account@agile-tangent-401105.iam.gserviceaccount.com'
-        # access_token_lifetime: 300s
+    
+    - id: 'get-credentials'
+      uses: 'google-github-actions/get-gke-credentials@v1'
+      with:
+        cluster_name: 'primary-cluster'
+        location: 'northamerica-northeast2-a'
+
+        # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+    - id: 'get-pods'
+      run: 'kubectl get pods -n swath'
