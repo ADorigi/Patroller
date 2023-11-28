@@ -1,0 +1,58 @@
+name: Argo-setup 
+
+on:
+    workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+          shell: bash
+          working-directory: argocd
+    permissions:
+        contents: 'read'
+        id-token: 'write'
+    steps:
+    - uses: actions/checkout@v3
+
+    - id: 'authGCP'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        token_format: access_token
+        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider-id'
+        service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
+    
+    - id: 'gke-credentials'
+      uses: 'google-github-actions/get-gke-credentials@v1'
+      with:
+        cluster_name: 'primary-cluster'
+        location: 'northamerica-northeast2-a'
+
+        # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+    # - id: 'get-pods'
+    #   run: 'kubectl get pods -n swath'
+
+     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+
+    # create new workspace to create new state file
+    - name: Setup Workspace
+      run: terraform workspace new $(uuidgen)
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt 
+
+    - name: List files 
+      run: ls
+
+  # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: make tfplan

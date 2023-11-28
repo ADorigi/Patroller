@@ -1,0 +1,11 @@
+---
+# This is latest version when creating this file
+global:
+  image:
+    tag: "2.9.2"
+
+# this is because we are going to expose argocd through ingress on gke
+# ingress will terminate ssl and http will be used after that
+server:
+  extraArgs:
+    - --insecure
