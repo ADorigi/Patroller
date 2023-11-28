@@ -21,8 +21,8 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: access_token
-        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider-id'
-        service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.SERVICE_ACCOUNT }}
     
     - id: 'gke-credentials'
       uses: 'google-github-actions/get-gke-credentials@v1'
