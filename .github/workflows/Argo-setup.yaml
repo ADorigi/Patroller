@@ -54,11 +54,11 @@ jobs:
       run: |
         ls 
         kubectl get ns
-        echo ${{ steps.gke-credentials.outputs.secret-kubeconfig_path }}
+        echo ${{ steps.gke-credentials.outputs.kubeconfig_path }}
 
   # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var 'kubeconfig=${{ steps.gke-credentials.outputs.secret-kubeconfig_path }}' -out=tfplan 
+      run: terraform plan -var 'kubeconfig=${{ steps.gke-credentials.outputs.kubeconfig_path }}' -out=tfplan 
     
     - name: Terraform Apply
       id: terraformapply
