@@ -9,3 +9,8 @@ global:
 server:
   extraArgs:
     - --insecure
+
+# -- Install and upgrade CRDs
+# This was because of error in pipeline
+crds:
+  install: false

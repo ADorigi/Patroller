@@ -13,8 +13,8 @@ terraform {
 }
 
 provider "helm" {
-    kubernetes {
-      config_path = var.kubeconfig
-    }
-  
+  kubernetes {
+    config_path = var.kubeconfig
+  }
+
 }
