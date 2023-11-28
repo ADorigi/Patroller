@@ -55,8 +55,8 @@ jobs:
 
   # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: make tfplan
+      run: terraform plan -var 'kubeconfig=${{ steps.gke-credentials.outputs.secret-kubeconfig_path }}' -out=tfplan 
     
     - name: Terraform Apply
       id: terraformapply
-      run: make tfapply
+      run: terraform apply -auto-approve tfplan
