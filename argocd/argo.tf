@@ -1,5 +1,5 @@
 resource "helm_release" "argocd" {
-  name             = "argocd"
+  name             = "argocd-helm-release"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   namespace        = "argocd"
