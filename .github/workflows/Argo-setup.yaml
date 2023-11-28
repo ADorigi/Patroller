@@ -51,7 +51,10 @@ jobs:
       run: terraform fmt 
 
     - name: List files 
-      run: ls
+      run: |
+        ls 
+        kubectl get ns
+        echo ${{ steps.gke-credentials.outputs.secret-kubeconfig_path }}
 
   # Generates an execution plan for Terraform
     - name: Terraform Plan
