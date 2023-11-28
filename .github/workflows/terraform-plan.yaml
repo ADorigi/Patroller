@@ -39,7 +39,7 @@ jobs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
-        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider'
+        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider-id'
         service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
