@@ -12,7 +12,9 @@ terraform {
   }
 }
 
-provider "google" {
-  project = "agile-tangent-401105"
-  region  = "northamerica-northeast2"
+provider "helm" {
+    kubernetes {
+      config_path = var.kubeconfig
+    }
+  
 }
