@@ -56,3 +56,7 @@ jobs:
   # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: make tfplan
+    
+    - name: Terraform Apply
+      id: terraformapply
+      run: make tfapply
