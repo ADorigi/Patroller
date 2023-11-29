@@ -31,35 +31,5 @@ jobs:
         location: 'northamerica-northeast2-a'
 
         # The KUBECONFIG env var is automatically exported and picked up by kubectl.
-    # - id: 'get-pods'
-    #   run: 'kubectl get pods -n swath'
-
-     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
-
-    # create new workspace to create new state file
-    - name: Setup Workspace
-      run: terraform workspace new $(uuidgen)
-
-      # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt 
-
-    - name: List files 
-      run: |
-        ls 
-        kubectl get ns
-        echo ${{ steps.gke-credentials.outputs.kubeconfig_path }}
-
-  # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan -var 'kubeconfig=${{ steps.gke-credentials.outputs.kubeconfig_path }}' -out=tfplan 
-    
-    - name: Terraform Apply
-      id: terraformapply
-      run: terraform apply -auto-approve tfplan
+    - id: 'argocd-k8s'
+      run: 'make ingress'
