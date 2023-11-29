@@ -6,7 +6,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "gke-static-ip"
 spec:
-  ingressClassName: nginx
   rules:
   - host: swathadmin.gule-gulzar.com 
     http:
