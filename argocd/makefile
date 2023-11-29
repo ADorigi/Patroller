@@ -1,6 +1,6 @@
 namespace:
-	kubectl create -f namespace.yaml
+	kubectl apply -f namespace.yaml
 argocd:
-	kubectl create -f argocd.yaml
+	kubectl apply -f argocd.yaml
 ingress:
-	kubectl create -f ingress.yaml
+	kubectl apply -f ingress.yaml
