@@ -4,3 +4,11 @@ argocd:
 	kubectl apply -n argocd -f k8s-but-use-make/argocd.yaml
 certificate:
 	kubectl apply -n argocd -f k8s-but-use-make/managedcertificate.yaml
+externalservice:
+	kubectl apply -n argocd -f k8s-but-use-make/externalservice.yaml
+backendconfig:
+	kubectl apply -n argocd -f k8s-but-use-make/backendconfig.yaml
+frontendconfig:
+	kubectl apply -n argocd -f k8s-but-use-make/frontendconfig.yaml
+ingress:
+	kubectl apply -n argocd -f k8s-but-use-make/ingress.yaml

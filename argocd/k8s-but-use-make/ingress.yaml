@@ -1,0 +1,21 @@
+# Ingress used to expose argocd ui server to the url
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: gke-static-ip
+    networking.gke.io/managed-certificates: argocd-admin-cert
+    networking.gke.io/v1beta1.FrontendConfig: argocd-frontend-config
+spec:
+  rules:
+    - host: argocd.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server-external
+                port:
+                  number: 80

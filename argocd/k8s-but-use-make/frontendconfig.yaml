@@ -1,0 +1,9 @@
+# frontend config to use with ingress created with ingress.yaml
+# What is does? redirects http request to ingress to https 
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: argocd-frontend-config
+spec:
+  redirectToHttps:
+    enabled: true
