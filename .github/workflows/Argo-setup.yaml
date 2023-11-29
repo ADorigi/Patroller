@@ -1,9 +1,7 @@
 name: Argo-setup 
 
 on:
-  push:
-    paths: 
-      - 'argocd/**'
+    workflow_dispatch:
 
 jobs:
 
