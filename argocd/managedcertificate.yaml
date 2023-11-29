@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: argocd-admin-cert
+  namespace: argocd
+
+spec:
+  domains:
+    - swathadmin.gule-gulzar.com
