@@ -1,6 +1,6 @@
 namespace:
-	kubectl apply -f namespace.yaml
+	kubectl apply -f k8s-but-use-make/namespace.yaml
 argocd:
-	kubectl apply -n argocd -f argocd.yaml
-ingress:
-	kubectl apply -n argocd -f ingress.yaml
+	kubectl apply -n argocd -f k8s-but-use-make/argocd.yaml
+certificate:
+	kubectl apply -n argocd -f k8s-but-use-make/managedcertificate.yaml
