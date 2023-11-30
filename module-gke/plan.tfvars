@@ -11,4 +11,4 @@ service_account_roles = [
 ]
 static-ip-name              = "gke-static-ip"
 spot-node-pool              = true
-gke-cluster-networking-mode = "VPC_NATIVE"
+# gke-cluster-networking-mode = "VPC_NATIVE"

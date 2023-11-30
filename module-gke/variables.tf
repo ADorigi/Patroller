@@ -36,6 +36,6 @@ variable "static-ip-name" {
   type = string
 }
 
-variable "gke-cluster-networking-mode" {
-  type = string
-}
+# variable "gke-cluster-networking-mode" {
+#   type = string
+# }
