@@ -62,7 +62,7 @@ module "gke-cluster" {
   gke-cluster-name             = "primary-cluster"
   gke-zone                     = "northamerica-northeast2-a"
   gke-region                   = "northamerica-northeast2"
-  gke-cluster-networking-mode      = "VPC_NATIVE"
+  gke-cluster-networking-mode  = "VPC_NATIVE"
   gke-node-pool-name           = "gke-node-pool"
   gke-node-pool-machine-type   = "e2-small"
   spot-node-pool               = true
