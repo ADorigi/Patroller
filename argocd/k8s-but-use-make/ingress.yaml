@@ -9,7 +9,7 @@ metadata:
     networking.gke.io/v1beta1.FrontendConfig: argocd-frontend-config
 spec:
   rules:
-    - host: argocd.example.com
+    - host: swathadmin.gule-gulzar.com
       http:
         paths:
           - path: /
