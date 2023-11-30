@@ -9,5 +9,6 @@ service_account_roles = [
   "roles/artifactregistry.reader",
   "roles/artifactregistry.writer",
 ]
-static-ip-name = "gke-static-ip"
-spot-node-pool = true
+static-ip-name          = "gke-static-ip"
+spot-node-pool          = true
+gke-cluster-networking-mode = "VPC_NATIVE"
