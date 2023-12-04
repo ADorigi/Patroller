@@ -18,3 +18,12 @@ variable "vpc_name" {
 variable "private_ip_access" {
   type = bool
 }
+
+variable "secondary_ip_range_names" {
+  type    = list(string)
+  default = []
+}
+variable "secondary_ip_ranges" {
+  type    = list(string)
+  default = []
+}

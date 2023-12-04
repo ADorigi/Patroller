@@ -1,7 +1,11 @@
+locals {
+  region = "northamerica-northeast2"
+  zone   = "northamerica-northeast2-a"
+}
 module "artifact-registry" {
   source        = "./module-artifactregistry"
   repository-id = "container-registry"
-  region        = "northamerica-northeast2"
+  region        = local.region
   description   = "artifact registry for swath"
   format        = "DOCKER"
 }
@@ -35,40 +39,36 @@ module "google-network" {
   mtu          = 1460
 }
 
-
-module "subnet-public" {
-  source            = "./module-subnet"
-  subnet_name       = "public-subnet"
-  ip_cidr_range     = "10.0.0.0/16"
-  region            = "northamerica-northeast2"
-  vpc_name          = "patroller-vpc"
-  private_ip_access = "false"
-}
-
 module "subnet-private" {
-  source            = "./module-subnet"
-  subnet_name       = "private-subnet"
-  ip_cidr_range     = "10.1.0.0/16"
-  region            = "northamerica-northeast2"
-  vpc_name          = "patroller-vpc"
-  private_ip_access = "true"
+  source                   = "./module-subnet"
+  subnet_name              = "private-subnet"
+  ip_cidr_range            = "10.1.0.0/16"
+  region                   = local.region
+  vpc_name                 = "patroller-vpc"
+  private_ip_access        = "true"
+  secondary_ip_range_names = ["pod-range", "service-range"]
+  secondary_ip_ranges      = ["10.2.0.0/24", "10.3.0.0/24"]
 }
+
+module "router-nat" {
+  source                = "./module-router-nat"
+  router_name           = "gke-subnet-router"
+  region                = local.region
+  network-id            = module.google-network.vpc_id
+  router_nat_name       = "gke-router-nat"
+  nat_ip_ranges         = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+  nat_allocation_option = "AUTO_ONLY"
+
+}
+
 
 module "gke-cluster" {
 
-  source                       = "./module-gke"
-  service_account_id           = "gke-service-account"
-  service_account_display_name = "Service Account for gke(particularly gke node pool)"
-  gke-cluster-name             = "primary-cluster"
-  gke-zone                     = "northamerica-northeast2-a"
-  gke-region                   = "northamerica-northeast2"
-  #   gke-cluster-networking-mode  = "VPC_NATIVE"
-  gke-node-pool-name         = "gke-node-pool"
-  gke-node-pool-machine-type = "e2-small"
-  spot-node-pool             = true
-  service_account_roles = [
-    "roles/artifactregistry.reader",
-    "roles/artifactregistry.writer",
-  ]
-  static-ip-name = "gke-static-ip"
+  source           = "./module-gke"
+  gke-cluster-name = "primary-cluster"
+  gke-zone         = local.zone
+  gke-region       = local.region
+  gke-network      = module.google-network.name
+  gke-subnetwork   = module.subnet-private.name
+
 }
