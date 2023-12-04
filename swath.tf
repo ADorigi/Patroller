@@ -12,7 +12,7 @@ module "artifact-registry" {
 
 module "swath_identity_pool" {
   source                    = "./module-identityfederation"
-  workload_identity_pool_id = "swath-gh-idenity-pool"
+  workload_identity_pool_id = "workload-identity-pool-swath"
   idenity_pool_name         = "Swath Github actions pool"
   idenity_pool_description  = "Identity pool to allow swath github actions to access gcp resources"
   identity_pool_provider_id = "swath-pool-provider-id"
