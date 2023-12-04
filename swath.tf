@@ -44,7 +44,7 @@ module "subnet-private" {
   subnet_name              = "private-subnet"
   ip_cidr_range            = "10.1.0.0/16"
   region                   = local.region
-  vpc_name                 = "patroller-vpc"
+  vpc_name                 = module.google-network.name
   private_ip_access        = "true"
   secondary_ip_range_names = ["pod-range", "service-range"]
   secondary_ip_ranges      = ["10.2.0.0/24", "10.3.0.0/24"]
@@ -66,7 +66,6 @@ module "gke-cluster" {
 
   source           = "./module-gke"
   gke-cluster-name = "primary-cluster"
-  gke-zone         = local.zone
   gke-region       = local.region
   gke-network      = module.google-network.name
   gke-subnetwork   = module.subnet-private.name
