@@ -61,6 +61,12 @@ module "router-nat" {
 
 }
 
+module "static-ip" {
+  source         = "./module-static-ip"
+  static-ip-name = "gke-static-ip"
+
+}
+
 
 module "gke-cluster" {
 
@@ -70,4 +76,10 @@ module "gke-cluster" {
   gke-network      = module.google-network.name
   gke-subnetwork   = module.subnet-private.name
 
+  depends_on = [
+    module.google-network,
+    module.subnet-private,
+    module.module.router-nat,
+    mod
+  ]
 }

@@ -1,0 +1,3 @@
+variable "static-ip-name" {
+
+}
