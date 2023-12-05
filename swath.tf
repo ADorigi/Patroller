@@ -76,10 +76,4 @@ module "gke-cluster" {
   gke-network      = module.google-network.name
   gke-subnetwork   = module.subnet-private.name
 
-  depends_on = [
-    module.google-network,
-    module.subnet-private,
-    module.module.router-nat,
-    mod
-  ]
 }
