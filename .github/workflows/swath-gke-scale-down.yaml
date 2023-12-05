@@ -1,42 +1,42 @@
-name: 'Good Night'
+# name: 'Good Night'
 
-on:
-    workflow_dispatch:
-    schedule:
-        - cron: '30 2 * * *'
+# on:
+#     workflow_dispatch:
+#     schedule:
+#         - cron: '30 2 * * *'
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-jobs:
-  scaleup:
-    name: 'Good Night'
-    runs-on: ubuntu-latest
-    environment: production
+# jobs:
+#   scaleup:
+#     name: 'Good Night'
+#     runs-on: ubuntu-latest
+#     environment: production
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
+#     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+#     defaults:
+#       run:
+#         shell: bash
+#     permissions:
+#       contents: 'read'
+#       id-token: 'write'
+#     steps:
       
-    # gcp authorization with workload identity federation
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider-id'
-        service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
+#     # gcp authorization with workload identity federation
+#     - id: 'auth'
+#       uses: 'google-github-actions/auth@v1'
+#       with:
+#         workload_identity_provider: 'projects/797097160987/locations/global/workloadIdentityPools/github-id-pool/providers/github-provider-id'
+#         service_account: 'gh-service-account@agile-tangent-401105.iam.gserviceaccount.com'
 
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
-      with:
-        version: '>= 363.0.0'
+#     - name: 'Set up Cloud SDK'
+#       uses: 'google-github-actions/setup-gcloud@v1'
+#       with:
+#         version: '>= 363.0.0'
         
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
+#     - name: 'Use gcloud CLI'
+#       run: 'gcloud info'
     
-    - name: 'Scale up node pool'
-      run: 'gcloud -q container clusters resize primary-cluster --zone northamerica-northeast2-a --node-pool primary-cluster --num-nodes 0'
+#     - name: 'Scale up node pool'
+#       run: 'gcloud -q container clusters resize primary-cluster --zone northamerica-northeast2-a --node-pool primary-cluster --num-nodes 0'
