@@ -12,3 +12,9 @@ frontendconfig:
 	kubectl apply -n argocd -f k8s-but-use-make/frontendconfig.yaml
 ingress:
 	kubectl apply -n argocd -f k8s-but-use-make/ingress.yaml
+
+watchcert:
+	watch -n 0.5 kubectl describe -n argocd ManagedCertificate 
+
+watchingress:
+	watch -n 0.5 kubectl describe -n argocd ingress
