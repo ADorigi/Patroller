@@ -61,12 +61,19 @@ module "router-nat" {
 
 }
 
+# static ip to expose access to argocd ui
 module "static-ip" {
   source         = "./module-static-ip"
   static-ip-name = "gke-static-ip"
 
 }
 
+# static ip for swath 
+module "static-ip-swath" {
+  source         = "./module-static-ip"
+  static-ip-name = "static-ip-swath"
+
+}
 
 module "gke-cluster" {
 
