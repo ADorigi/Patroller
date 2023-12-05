@@ -9,6 +9,6 @@ spec:
     timeoutSec: 5
     healthyThreshold: 1
     unhealthyThreshold: 2
-    type: HTTP
+    type: HTTPS
     requestPath: /healthz
     port: 8080
