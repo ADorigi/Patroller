@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: argocd
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: gke-static-ip
+    kubernetes.io/ingress.global-static-ip-name: static-ip-argocd
     networking.gke.io/managed-certificates: argocd-admin-cert
     networking.gke.io/v1beta1.FrontendConfig: argocd-frontend-config
 spec:
