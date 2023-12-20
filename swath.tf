@@ -64,7 +64,7 @@ module "router-nat" {
 # static ip to expose access to argocd ui
 module "static-ip" {
   source         = "./module-static-ip"
-  static-ip-name = "gke-static-ip"
+  static-ip-name = "static-ip-argocd"
 
 }
 
@@ -77,10 +77,23 @@ module "static-ip-swath" {
 
 module "gke-cluster" {
 
-  source           = "./module-gke"
+  source                       = "./module-gke"
+  service_account_id           = "gke-service-account"
+  service_account_display_name = "Service Account for gke(particularly gke node pool)"
+  service_account_roles = [
+    "roles/artifactregistry.reader",
+    "roles/artifactregistry.writer",
+  ]
   gke-cluster-name = "primary-cluster"
-  gke-region       = local.region
-  gke-network      = module.google-network.name
-  gke-subnetwork   = module.subnet-private.name
+  gke-zone         = "northamerica-northeast2-a"
 
+  gke-node-pool-name          = "gke-node-pool"
+  gke-node-pool-machine-type  = "e2-small"
+  spot-node-pool              = true
+  gke-cluster-networking-mode = "VPC_NATIVE"
+
+  gke-network         = module.google-network.name
+  gke-subnetwork      = module.subnet-private.name
+  cluster-range-name  = "pod-range"
+  services-range-name = "service-range"
 }
