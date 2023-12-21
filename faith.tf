@@ -25,5 +25,5 @@ module "instance" {
   instance_zone         = "${local.faith_region}-b"
   instance_boot_image   = local.boot_image
   instance_subnetwork   = module.subnet.name
-  vpc = local.vpc_name
+  vpc                   = local.vpc_name
 }
