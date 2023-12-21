@@ -1,8 +1,8 @@
 
 locals {
-  vpc_name = "patroller-vpc"
+  vpc_name     = "patroller-vpc"
   faith_region = "us-east1"
-  useast1_cidr = "11.1.0.0/16" 
+  useast1_cidr = "11.1.0.0/16"
 }
 
 
