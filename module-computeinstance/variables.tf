@@ -17,3 +17,7 @@ variable "instance_boot_image" {
 variable "instance_subnetwork" {
   type = string
 }
+
+variable "vpc" {
+  type = string
+}
