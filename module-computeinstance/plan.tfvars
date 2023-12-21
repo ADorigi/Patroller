@@ -1,0 +1,5 @@
+instance_name         = "test_name"
+instance_machine_type = "e2-micro"
+instance_zone         = "test_zone"
+instance_boot_image   = "test_image" 
+instance_subnetwork   = "test_subnetwork" 
